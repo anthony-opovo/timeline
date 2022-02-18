@@ -1,0 +1,290 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.align-center {
+  display: grid;
+  place-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 11rem 0;
+}
+
+/* Adicionando margem no topo do container para não cortar a imagem do jornal quando o transform for acionado */
+.owl-stage {
+  margin-top: 3rem;
+}
+
+.slide-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.slider-image {
+  transition: 1s;
+  width: 29rem !important;
+}
+
+.owl-item {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.owl-item.active.center .slider-image {
+  transform: translateY(-10px);
+}
+
+.owl-item:not(.active.center) .slider-image {
+  opacity: 0.4;
+  transform: scale(0.7);
+  transition: all 1s;
+}
+
+.timeline-wrapper {
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+  position: absolute;
+  top: calc(49% + 4px);
+  left: 43%;
+  z-index: 1;
+}
+
+.owl-item.active.center .timeline-wrapper {
+  -webkit-animation: fadeOut 1s;
+  animation: fadeOut 1s;
+  opacity: 0;
+}
+
+.date {
+  font-weight: bold;
+}
+
+.elipse {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #319ac1;
+  margin-bottom: 1.1rem;
+}
+
+/* "Animação" para as datas que ficam no jornal  */
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.line {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  width: 90%;
+  left: 5%;
+  border: 1px solid #918989;
+}
+
+.owl-next,
+.owl-prev {
+  position: absolute;
+  top: 46%;
+  width: 40px;
+  height: 40px;
+}
+
+.owl-prev {
+  left: 5%;
+}
+.owl-next {
+  right: 5%;
+}
+
+/* Fiz o gerenciamento de estado dos icones direto no SVG, pois fui informado de que o componente vai ser embedado diretamente em um iframe */
+.owl-prev.disabled .icon-circle,
+.owl-next.disabled .icon-circle {
+  fill: #999;
+}
+
+.owl-prev.disabled .icon-arrow,
+.owl-next.disabled .icon-arrow {
+  fill: #666;
+}
+
+.owl-prev:not(.disabled):hover .icon-circle,
+.owl-next:not(.disabled):hover .icon-circle {
+  fill: #319ac1;
+}
+
+.owl-prev:not(.disabled):hover .icon-arrow,
+.owl-next:not(.disabled):hover .icon-arrow {
+  fill: #fff;
+}
+
+.disabled {
+  cursor: initial !important;
+}
+
+.description-wrapper {
+  max-width: 60rem;
+  padding: 0 1rem;
+}
+
+.description-date {
+  font-weight: bold;
+  font-size: 2.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 2rem;
+  line-height: 2.7rem;
+}
+
+.description-info {
+  line-height: 2.7rem;
+  margin-top: 1.2rem;
+}
+
+.owl-carousel {
+  margin-bottom: 3rem;
+}
+
+.owl-carousel::before {
+  width: 100%;
+  height: 100%;
+  content: "";
+  position: absolute;
+  z-index: -1;
+  opacity: 0.3;
+  background: url('https://mais.opovo.com.br/_midias/jpg/2022/02/01/credos_04_-18001296.jpg?') center center;
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 10; 
+  padding-top: 10rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 100%;
+  max-width: 50rem;
+}
+
+.modal-content {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+.close {
+  position: absolute;
+  top: 5%;
+  right: 10%;
+  color: #f1f1f1;
+  font-size: 4rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+
+.js-open-modal {
+  position: absolute;
+  z-index: 2;
+  bottom: 5%;
+  right: 10%;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.js-open-modal:hover {
+  transform: scale(1.1);
+}
+
+.owl-item.active.center .js-open-modal {
+  -webkit-animation: fadein 1s;
+  animation: fadeIn 1s;
+  opacity: 1;
+}
+
+.owl-item:not(.active.center) .js-open-modal {
+  -webkit-animation: fadeOut .5s;
+  animation: fadeOut .5s;
+  opacity: 0;
+}
